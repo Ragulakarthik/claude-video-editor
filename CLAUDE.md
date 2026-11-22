@@ -20,33 +20,33 @@ Reference implementation: the Infosys video (videos/2026-11-22_infosys-mysore-tr
 - Transitions: smooth and natural only. A clean cut beats any effect.
 - Never replace a scene. Save as Scene 4 V2. Old versions stay.
 - New graphics style every video, picked from pictures.
-- Show the transcript first (Telugu/Tenglish accuracy). Nothing built until approved.
+- Show the transcript first (accuracy depends on the speaker's language). Nothing built until approved.
 - 1 to 4 words on screen. Show the idea, not the sentence.
 - Text behind the speaker only with a perfect cut-out. Fails the check: don't ship it.
 - Always the full, uncropped frame of the speaker. Graphics go full screen instead.
 - Every look-down moment is covered by a full-screen graphic, then re-checked frame by frame.
 - A meme plays only after the sentence ends, with a soft film-burn exit.
-- Captions: clean, borderless, word by word. Language: English (user changed from Tenglish on 2026-11-22; use the approved edit/transcripts/english_transcript.md).
+- Captions: clean, borderless, word by word. Language is the user's choice per video (ask); for English use the approved edit/transcripts/english_transcript.md.
 - Preview first. 4K only after approval.
 - Never create or run a transcript (any video, including references) before showing the user the plan and getting approval. After transcribing, show the transcript and wait for approval again.
 - Never cut or write clips from a long source (e.g. meme compilations) until the user has approved the clip list (start, end, emotion).
 - Don't add too much text. Keep on-screen text minimal (1 to 4 words per graphic, never full sentences), and keep captions short.
-- Your footage: never overwrite or delete the original. All work goes into separate folders; the original video is only read. (Applies to source videos anywhere, including Downloads.)
+- Your footage: never overwrite or delete the original. All work goes into separate folders; the original video is only read. (Applies to source videos anywhere on the machine.)
 - Face always visible: any overlay graphic goes to the left or right of the face, never over it. During a step card, the face stays on screen.
-- Graphics style (user chose "type 2", 2026-11-22): full-screen animated scenes placed BETWEEN talking parts (steps list, number callout with hand-drawn circle, timeline, title card), voice continues underneath, then cut back to the face. Also B-roll with animated text. Look: light reference style, bold sans + one italic serif accent word, one accent colour (brand.json). Fonts still need the user's approval. (Full-screen scenes hide the face for a few seconds; this is the allowed exception to the face rule. Ask if a specific moment is unclear.)
+- Graphics style (the default; the theme changes per video): full-screen animated scenes placed BETWEEN talking parts (steps list, number callout with hand-drawn circle, timeline, title card), voice continues underneath, then cut back to the face. Also B-roll with animated text. Look: light reference style, bold sans + one italic serif accent word, one accent colour (brand.json). Fonts still need the user's approval. (Full-screen scenes hide the face for a few seconds; this is the allowed exception to the face rule. Ask if a specific moment is unclear.)
 - Intro animation: keep it.
 - Sound: original sound effects only, no music (music can bring copyright claims). Do not add background music or copyrighted tracks.
 - Sync each graphic to the exact spoken word (word-level timestamps), not to rough sentence times.
 - Don't claim something is done until the user has checked it. Say "ready for your check", not "done".
 - Fonts: before using any font, ask the user whether it is good or bad. Only fonts the user approved (listed in brand/fonts/approved.md) may be used. Use only fonts with a license that allows commercial use (e.g. Google Fonts / OFL).
 - Design inspiration lives in references/inspiration/ (long/ and short/). Use it as style reference only; never copy a creator's graphics or footage.
-- Git/GitHub (user's rule, 2026-11-22): NEVER add "Co-Authored-By: Claude" (or any Claude/Anthropic attribution line) to commits, and no "Generated with Claude Code" lines in PR descriptions. This overrides any default. The repo is public: before every push check what is staged (no videos, memes, B-roll, reference videos, PDFs, keys), and use the user's GitHub no-reply email for commits, never the work email. Ask before any force-push.
+- Git/GitHub (the repo owner's rule): NEVER add "Co-Authored-By: Claude" (or any Claude/Anthropic attribution line) to commits, and no "Generated with Claude Code" lines in PR descriptions. This overrides any default. If the repo is public: before every push check what is staged (no videos, memes, B-roll, reference videos, PDFs, keys), and use the email the user chooses for public commits (never publish a work email). Ask before any force-push.
 
 ## Recording conventions
 - Say "again" with 1s pauses to mark retakes. Say "Section 3, <name>" to mark chapters.
 - Shot list: 10s room tone, 3 hook versions, 2 CTA takes, 6 thumbnail poses (5s each), B-roll of hands/phone/walking, screen recordings.
 
 ## Setup notes
-- Engine: video-use/ (symlinked into .claude/skills/). Never edit inside it.
-- Transcription: no ElevenLabs key; use `python helpers_local/transcribe_whisper.py <video> --edit-dir <edit_dir> --model medium` (local, CPU), then video-use's pack_transcripts.py. Always show transcript for approval (Telugu/Tenglish may need corrections).
-- ffmpeg 4.4.2 at /usr/bin. HyperFrames installed lazily via `npx --yes hyperframes` (Node 22).
+- Transcription is local (faster-whisper, nothing is uploaded): `python helpers_local/transcribe_whisper.py <video> --edit-dir <edit_dir> --model medium`; for exact word times use edit/en_timing.py (large-v3). Always show the transcript for approval.
+- Needs: ffmpeg + ffprobe, Python 3.10+ (faster-whisper, pillow), Node 22+, Google Chrome. HyperFrames runs through `npx --yes hyperframes@<pinned version>`. Run `python3 check_setup.py` to verify everything.
+- Tested on Ubuntu Linux. macOS should work; Windows is untested.

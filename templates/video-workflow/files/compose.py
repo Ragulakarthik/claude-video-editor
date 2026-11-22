@@ -6,7 +6,8 @@ import json, re, subprocess, sys, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
-import glob
+import glob, shutil
+NICE = ["nice", "-n", "10"] if (shutil.which("nice") and os.name != "nt") else []  # lower priority where the OS has nice
 SRC = sorted(glob.glob("../aroll/*.mp4"))[0]  # the speaker footage (read-only copy of the original)
 RES4K = os.environ.get("RES") == "4k"
 W, H = (3840, 2160) if RES4K else (1920, 1080)
@@ -302,7 +303,7 @@ chain.append("[base][ov]overlay=format=auto:eof_action=pass[vout]")
 chain.append("[0:a][2:a]amix=inputs=2:normalize=0:duration=first:dropout_transition=0[aout]")
 open("filter_debug.txt", "w").write(";\n".join(chain))
 out = sys.argv[1] if len(sys.argv) > 1 else "preview_v1.mp4"
-cmd = ["nice", "-n", "10", "ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", SRC, "-i", SCENES, "-i", "sfx_track.wav",
+cmd = NICE + ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", SRC, "-i", SCENES, "-i", "sfx_track.wav",
        "-filter_complex", ";".join(chain), "-map", "[vout]", "-map", "[aout]",
        "-c:v", "libx264", "-preset", "veryfast", "-crf", ("19" if RES4K else "21"), "-pix_fmt", "yuv420p", "-r", "30",
        "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-t", os.environ.get("TEST_T", f"{DUR_TOTAL:.3f}"), out]

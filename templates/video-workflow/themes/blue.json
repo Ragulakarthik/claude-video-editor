@@ -1,0 +1,14 @@
+{
+ "name": "Blue editorial",
+ "accent": "#1F5FBF",
+ "accent_light": "#8fb3ff",
+ "accent_light2": "#a9c3ff",
+ "ink": "#0f1a2e",
+ "ground": "#eef2f8",
+ "sans": "Inter Tight",
+ "serif": "Instrument Serif",
+ "sans_file": "InterTight.ttf",
+ "serif_italic_file": "InstrumentSerif-Italic.ttf",
+ "serif_regular_file": "InstrumentSerif-Regular.ttf",
+ "fonts_dir": "../../../brand/fonts/approved"
+}

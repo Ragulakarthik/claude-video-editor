@@ -1,0 +1,14 @@
+{
+ "name": "Orange editorial",
+ "accent": "#E0561F",
+ "accent_light": "#ff9a66",
+ "accent_light2": "#ffb38a",
+ "ink": "#1d1209",
+ "ground": "#f6f1ea",
+ "sans": "Inter Tight",
+ "serif": "Instrument Serif",
+ "sans_file": "InterTight.ttf",
+ "serif_italic_file": "InstrumentSerif-Italic.ttf",
+ "serif_regular_file": "InstrumentSerif-Regular.ttf",
+ "fonts_dir": "../../../brand/fonts/approved"
+}

@@ -7,6 +7,25 @@ captions, original sound effects, a gentle zoom and grade, then thumbnail, title
 You give Claude your raw video. Claude does the editing with the scripts in this repo, and you approve each gate
 (transcript, plan, preview) before it goes on.
 
+## What it makes
+Full-screen animated scenes that appear on the exact spoken word, between the parts where you talk to the camera
+(these are real frames from the scenes this repo builds):
+
+| | |
+|---|---|
+| ![Steps list](docs/examples/steps-list.png) | ![Number callout](docs/examples/number-callout.png) |
+| ![Test cleared](docs/examples/test-cleared.png) | ![Progress track](docs/examples/progress-track.png) |
+| ![Six and twelve months](docs/examples/six-and-twelve-months.png) | |
+
+**Only the theme changes between videos.** The same screen in three themes (`templates/video-workflow/themes/`):
+
+| Red | Blue | Orange |
+|---|---|---|
+| ![Red theme](docs/examples/theme-red.png) | ![Blue theme](docs/examples/theme-blue.png) | ![Orange theme](docs/examples/theme-orange.png) |
+
+To use one, copy it over the `theme.json` of your video (`edit/animations/slot_scenes/theme.json`), or write your own
+(accent colours, text colour, background, font names).
+
 ## What is in this repo
 | Path | What it is |
 |---|---|
@@ -16,6 +35,8 @@ You give Claude your raw video. Claude does the editing with the scripts in this
 | `helpers_local/transcribe_whisper.py` | local Whisper transcription (nothing is uploaded) |
 | `brand/` | brand settings, the font approval list, original synthesized sound effects (no music) |
 | `requirements.txt` | the Python packages |
+| `check_setup.py` | checks that everything is installed and tells you how to fix what is missing |
+| `docs/examples/` | example frames shown above |
 
 ## What to install
 You need a **paid Claude plan with Claude Code** (desktop app "Code" tab, or the CLI: `npm install -g @anthropic-ai/claude-code`).
@@ -31,13 +52,15 @@ Then these tools (Claude can install most of them for you if you use the prompt 
 | HyperFrames | pinned in `package.json` | nothing to install: it runs through `npx --yes hyperframes@0.9.81 ...` |
 | Fonts | | download your theme's fonts from [Google Fonts](https://fonts.google.com) (open licence) into `brand/fonts/approved/` and list them in `brand/fonts/approved.md` |
 
+Tested on **Ubuntu Linux**. macOS should work. Windows is untested (the scripts find Chrome and skip `nice` by themselves, but nobody has run them there yet).
+
 Good to know:
 - The first Whisper run downloads the `large-v3` model (about 3 GB). On a CPU it is slow (many minutes for a 5-minute video); a GPU is faster.
 - Keep about 5 GB free per video for previews and renders.
-- Check your setup:
+- Check your setup (tells you exactly what is missing and how to fix it):
   ```
-  ffmpeg -version | head -1 && node -v && python3 -c "import faster_whisper, PIL; print('python ok')" && google-chrome --version
-  npx --yes hyperframes@0.9.81 doctor
+  python3 check_setup.py            # quick check
+  python3 check_setup.py --doctor   # also runs the HyperFrames doctor
   ```
 
 ## Give this prompt to your Claude Code
@@ -49,8 +72,8 @@ You are my video editor. Set up and use this repo: https://github.com/Ragulakart
 1. Clone it into a folder called Claude-Editor and work inside it. Read CLAUDE.md and
    templates/video-workflow/README.md first. CLAUDE.md holds the original author's personal preferences:
    ask me which rules I want to keep or change before we start, then follow the workflow in CLAUDE.md for every video.
-2. Check what is installed: ffmpeg and ffprobe, Python 3.10+, faster-whisper and pillow (pip install -r requirements.txt),
-   Node 22+, Google Chrome. Install what is missing. If a step needs sudo, show me the exact command and let me run it.
+2. Run python3 check_setup.py to see what is installed (ffmpeg and ffprobe, Python 3.10+, faster-whisper and pillow via
+   pip install -r requirements.txt, Node 22+, Google Chrome). Install what is missing. If a step needs sudo, show me the exact command and let me run it.
    Then run: npx --yes hyperframes@0.9.81 doctor and fix any real problem.
 3. Theme: ask me for my fonts (a bold sans + one italic serif works well), my accent colour and the look I want.
    Tell me each font's licence and wait for my "good" or "bad" before using it. Download approved fonts from Google Fonts

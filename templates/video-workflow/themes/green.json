@@ -1,0 +1,14 @@
+{
+ "name": "Green editorial",
+ "accent": "#1E9E6A",
+ "accent_light": "#7ee0b4",
+ "accent_light2": "#9aeccb",
+ "ink": "#0e1d17",
+ "ground": "#eff5f1",
+ "sans": "Inter Tight",
+ "serif": "Instrument Serif",
+ "sans_file": "InterTight.ttf",
+ "serif_italic_file": "InstrumentSerif-Italic.ttf",
+ "serif_regular_file": "InstrumentSerif-Regular.ttf",
+ "fonts_dir": "../../../brand/fonts/approved"
+}

@@ -6,6 +6,22 @@ Writes ../thumbnail/thumbnail_<name>.png and .jpg (JPG is under 2 MB, ready for 
 """
 import argparse, glob, json, os, subprocess, tempfile, shutil
 
+def find_chrome():
+    """Finds Google Chrome / Chromium on Linux, macOS or Windows (or use the CHROME_PATH environment variable)."""
+    import os, shutil
+    if os.environ.get("CHROME_PATH"):
+        return os.environ["CHROME_PATH"]
+    for n in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "chrome"):
+        p = shutil.which(n)
+        if p:
+            return p
+    for p in ("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+              r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"):
+        if os.path.exists(p):
+            return p
+    raise SystemExit("Google Chrome not found. Install it, or set CHROME_PATH to its full path.")
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
 ap = argparse.ArgumentParser()
@@ -78,7 +94,7 @@ html = f"""<!doctype html><meta charset="utf-8"><style>
 hp = os.path.join(work, "t.html")
 open(hp, "w").write(html)
 raw = os.path.join(work, "raw.png")
-subprocess.run(["google-chrome", "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", "--window-size=1280,900",
+subprocess.run([find_chrome(), "--headless=new", "--disable-gpu", "--no-sandbox", "--hide-scrollbars", "--window-size=1280,900",
                 "--virtual-time-budget=5000", f"--screenshot={raw}", "file://" + hp], capture_output=True, timeout=120)
 from PIL import Image
 im = Image.open(raw).convert("RGB").crop((0, 0, 1280, 720))
