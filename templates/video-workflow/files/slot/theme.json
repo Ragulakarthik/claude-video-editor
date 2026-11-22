@@ -1,0 +1,14 @@
+{
+  "name": "Red editorial (Infosys video)",
+  "accent": "#D7263D",
+  "accent_light": "#ff6b7d",
+  "accent_light2": "#ff8a98",
+  "ink": "#14171c",
+  "ground": "#f2f2ef",
+  "sans": "Inter Tight",
+  "serif": "Instrument Serif",
+  "sans_file": "InterTight.ttf",
+  "serif_italic_file": "InstrumentSerif-Italic.ttf",
+  "serif_regular_file": "InstrumentSerif-Regular.ttf",
+  "fonts_dir": "../../../brand/fonts/approved"
+}

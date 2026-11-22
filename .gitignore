@@ -1,0 +1,19 @@
+# media and third-party material are not published
+videos/
+memes/
+broll-library/
+references/
+video-use/
+.claude/
+*.mp4
+*.mov
+*.mkv
+# fonts: download from Google Fonts (see README); only the approval list is tracked
+brand/fonts/approved/
+brand/fonts/candidates/
+brand/music/
+brand/transitions/
+node_modules/
+__pycache__/
+*.log
+*.pdf
