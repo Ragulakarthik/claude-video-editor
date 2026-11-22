@@ -86,6 +86,3 @@ Captions language: <English or the same language>
 ## Not included on purpose
 Videos, meme clips, stock B-roll and reference videos (copyright and size). The workflow keeps them in `videos/`, `memes/`, `broll-library/` and
 `references/`, which are git-ignored.
-
-## Credits
-Inspired by the "Your editor is Claude" field guide and the open-source `video-use` and HyperFrames projects.
