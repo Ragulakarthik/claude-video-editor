@@ -81,7 +81,7 @@ Captions language: <English or the same language>
 - Claude Code does the thinking (which screens, what to write). Without it you would write the scene list by hand.
 - It was built and tested end to end on one talking-head video (a person centred in front of a plain wall, 16:9). Other framings may need small changes
   (the zoom and thumbnail framing are tuned for a centred speaker).
-- There is no licence file yet, so by default the code is "all rights reserved".
+- Licensed under the MIT licence (see `LICENSE`). It covers the code and docs in this repo, not the tools it uses (ffmpeg, Whisper, HyperFrames, Claude Code) or your own videos and fonts, which keep their own licences.
 
 ## Not included on purpose
 Videos, meme clips, stock B-roll and reference videos (copyright and size). The workflow keeps them in `videos/`, `memes/`, `broll-library/` and
